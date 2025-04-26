@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ICU Mortality Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🌟 ICU Patient Mortality Predictor 🌟</h1>
+        <form action="/predict" method="post">
+            <input type="text" name="SAPS-I" placeholder="Enter SAPS-I Score" required value="{{ SAPS_I if SAPS_I is defined else '' }}"><br>
+            <input type="text" name="SOFA" placeholder="Enter SOFA Score" required value="{{ SOFA if SOFA is defined else '' }}"><br>
+            <input type="text" name="Length_of_stay" placeholder="Enter Length of Stay" required value="{{ Length_of_stay if Length_of_stay is defined else '' }}"><br>
+            <input type="text" name="Survival" placeholder="Enter Survival Days" required value="{{ Survival if Survival is defined else '' }}"><br>
+            <button type="submit">🔍 Predict</button>
+        </form>
+
+        {% if prediction_text %}
+        <div class="result">
+            <h2>🔮 {{ prediction_text }}</h2>
+            <p>{{ probability_survived }}</p>
+            <p>{{ probability_death }}</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+
